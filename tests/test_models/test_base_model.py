@@ -1,0 +1,106 @@
+""" Define test cases for BaseModel class """
+
+
+import unittest
+from models.base_model import BaseModel
+from datetime import datetime
+import os
+import uuid
+
+
+class TestBaseModelClass(unittest.TestCase):
+    """ Test cases for BaseModel class """
+
+    @classmethod
+    def setUpClass(cls):
+        """ Set up class instances """
+        cls.first_model = BaseModel()
+        cls.second_model = BaseModel()
+
+    def test_unique_id(self):
+        """ Test for unique id of each class instance """
+        self.assertNotEqual(self.first_model.id, self.second_model.id)
+
+    def test_instance_of_datetime(self):
+        """
+            Test that the craeted_at and updated_at attributes
+            are instancs of datetime
+        """
+        # for craeted_at attribute
+        self.assertIsInstance(self.first_model.created_at, datetime)
+        self.assertIsInstance(self.second_model.created_at, datetime)
+        # for update_at attribute
+        self.assertIsInstance(self.first_model.updated_at, datetime)
+        self.assertIsInstance(self.second_model.updated_at, datetime)
+
+    def test_str_method(self):
+        """
+            Test that the str method returns a string in the
+            format '[<class name>] (<self.id>) <self.dict>'
+        """
+        expected_output = (
+            f"[{type(self.first_model).__name__}] "
+            f"({self.first_model.id}) "
+            f"{self.forst_model.__dict__}"
+        )
+        self.assertEqual(str(self.first_model), expected_output)
+
+    def test_save_method(self):
+        """
+            Test that the save method update the
+            updated_at attribute to the current datetime
+        """
+        initial = self.first_model.update_at
+        updated = self.first_model.save()
+        self.assertNotEqual(initial, updated)
+
+    def test_to_dict_method(self):
+        """
+            Test that the to_dict method returns a dictionary
+            representation of the object with all instance attributes set
+        """
+        self.assertIsInstance(self.first_model.to_dict(), dict)
+
+    def test_ISO_format(self):
+        """
+            Test that the created_at and updated_at attributes
+            are converted to string objects in the ISO format specified.
+            It makes use of regukar expressions to match the pattern.
+        """
+        obj = self.first_model.to_dict()
+        pattern = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}"
+        self.assertRegx(str(obj['created_at']), pattern)
+        self.assertRegx(str(obj['updated_at']), pattern)
+
+    def test_recreate_instance(self):
+        """
+            Test that an instance is re-created from its
+            dictionary representation
+        """
+        obj_json = self.first_model.to_dict()
+        new_obj = BaseModel(**obj_json)
+        self.assertIsNot(obj_json, new_obj)
+
+    def test_datetime_objects(self):
+        """
+            Test that the created_at and updated_at attributes are
+            correctly converted from string format to datetime ibjects
+        """
+        obj_json = self.first_model.to_dict()
+        new_obj = BaseModel(**obj_json)
+        self.assertIsInstance(new_obj.created_at, datetime)
+        self.assertIsInstance(new_obj.updated_at, datetime)
+
+    def test_attributes(self):
+        """
+            Test that the dictionary reresentation returned by
+            the to_dict method does not contain any private attributes
+            (but only all public attributes) of the instance.
+            __class__ is not included
+        """
+        obj_json = self.first_model.to_dict()
+        vars_dict = vars(self.firs_model)
+        for key in obj_json:
+            if key == '__class__':
+                continue
+            self.assertIn(key, vars_dict)
