@@ -182,4 +182,4 @@ Usage:
 
 Authors
 
-Adugbo Justine @justine1285, and Iyanu Olatomide @ are formidable Interns at the ALX Africa Software Engineering programme 2022/2023 schedule.
+Adugbo Justine @justine1285, and Iyanu Olatomide @Oiyanu are formidable Interns at the ALX Africa Software Engineering programme 2022/2023 schedule.
