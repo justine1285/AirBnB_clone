@@ -51,6 +51,7 @@ attributes = {
         "user_id": str,
         "name": str,
         "description": str,
+        "number_rooms": int,
         "number_bathrooms": int,
         "max_guest": int,
         "price_by_night": int,
@@ -83,7 +84,12 @@ class HBNBCommand(cmd.Cmd):
         print("The `quit` command issues a command to quit the CLI.\n")
         print("Usage:\n(hbnb) quit\n")
 
-    def do_EOF(self) -> None:
+    def do_EOF(self, arg: any) -> True:
+        """Returns True and breaks the cmdloop"""
+        print("")
+        return True
+
+    def help_EOF(self) -> None:
         """Updates the help for EOF"""
         print("")
         print("The `EOF` command return True to break the cmdloop", end=" ")
@@ -102,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        arg_num + args.split(" ")
+        arg_num = args.split(" ")
         if arg_num[0] in all_classes.keys():
             obj = eval(arg_num[0] + "()")
             id = getattr(obj, 'id')
@@ -124,16 +130,16 @@ class HBNBCommand(cmd.Cmd):
         print("State\n\\t\User\n")
         print("Usage:\n(hbnb) create User\n")
 
-    def do_show(self(self, args=None) -> None:
+    def do_show(self, args=None) -> None:
         """Public instance method that displays the string instance
         of a class, based on the instance id and classname specified"""
         if len(args) == 0:
-            print("** class name missig **")
+            print("** class name missing **")
             return
         arg_num = args.split(" ")
         if arg_num[0] in all_classes.keys():
             if len(arg_num) >= 2:
-                id = "{}.{}".format(args_num[0], str(arg_num[1]))
+                id = "{}.{}".format(arg_num[0], str(arg_num[1]))
                 str_obj = storage.all()
                 if id in str_obj.keys():
                     obj = str_obj[id]
@@ -200,7 +206,7 @@ class HBNBCommand(cmd.Cmd):
             if arg_num[0] in all_classes.keys():
                 for key, val in storage.all().items():
                     if type(val).__name__ == args_num[0]:
-                        list_al.append(str(val))
+                        list_all.append(str(val))
             else:
                 print("** class doesn't exist ***")
                 return
@@ -216,13 +222,14 @@ class HBNBCommand(cmd.Cmd):
         print(" of all class instances present i the storage.\n")
         print("Usage:\n(hbnb) all User\nor\n(hbnb) User.all()\n")
 
-    def do_update(self, args) -. None:
+    def do_update(self, args) -> None:
         """Public instance method that updates a specified instance of a class
-        using the id and either adding more attributes or updating an attribute"""
+        using the id and either adding more attributes or updating
+        an attribute"""
         if len(args) == 0:
             print("** class name missing **")
             return
-        regx = r'^(S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*)|(?:(\S)+)))?)?)?'
+        regx = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
         is_match = re.search(regx, args)
         cls_name_match = is_match.group(1)
         uid_match = is_match.group(2)
@@ -237,7 +244,7 @@ class HBNBCommand(cmd.Cmd):
                             if val_match:
                                 datatype = None
                                 if not re.search('^".*"$', val_match):
-                                    if '.' ij val_match:
+                                    if '.' in val_match:
                                         datatype = float
                                     else:
                                         datatype = int
@@ -266,7 +273,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             print("** class name missing **")
-    
+
     def help_update(self) -> None:
         """Updates the help for update"""
         print("")
@@ -277,7 +284,7 @@ class HBNBCommand(cmd.Cmd):
         print("Usage:\n(hbnb) update User 1234-5678 email 'test@oop.com'\n")
 
     def do_count(self, args) -> None:
-        """Public instance method that counts the instances pf a class"""
+        """Public instance method that counts the instances of a class"""
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -335,17 +342,25 @@ class HBNBCommand(cmd.Cmd):
                         cid = cmd.split("(")[1].split(", ")[0].strip(')"')
                         cr_at = cmd.split("(")[1].split(", ")[1].strip(')"')
                         up_at = cmd.split("(")[1].split(", ")[2].strip(')"')
-                        joiner = "{} {} {} {}".format(clsname, cid, cr_at,
-                                                        up_at)
+                        joiner = "{} {} {} {}".format(
+                                clsname,
+                                cid,
+                                cr_at,
+                                up_at
+                        )
                         print(joiner)
                         self.do_update(joiner)
                     elif len(cmd.split("(")[1].split(", {")) == 2:
                         cid = cmd.split("(")[1].split(", {")[0].strip(')"')
-                        stn = cmd.split("(")[1].split(", {")[1].strip(')"')
+                        stn = cmd.split("(")[1].split(", {")[1].strip(")")
                         dic = eval("{" + stn)
                         for key, val in dic.items():
-                            joiner = "{} {} {} {}".format(clsname, cid,
-                                                            key, str(val))
+                            joiner = "{} {} {} {}".format(
+                                    clsname,
+                                    cid,
+                                    key,
+                                    str(val)
+                            )
                             print(joiner)
                             self.do_update(joiner)
 
