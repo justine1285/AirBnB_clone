@@ -336,7 +336,7 @@ class HBNBCommand(cmd.Cmd):
                     joiner = cls_name + " " + id
                     joiner = joiner.replace('"', "")
                     self.do_destroy(joiner)
-                elid "update" in cmd:
+                elif "update" in cmd:
                     clsname = cls_name
                     if "{" not in cmd.split("(")[1]:
                         cid = cmd.split("(")[1].split(", ")[0].strip(')"')
