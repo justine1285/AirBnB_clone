@@ -7,6 +7,7 @@ This is a python class that models a user class but inherits from
 the BaseModel class as the parent class
 """
 
+
 class User(BaseModel):
     """
     This is a class modelling the user object for the AirBnB Clone project.

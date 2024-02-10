@@ -7,6 +7,7 @@ This is a python class that models a place class but inherits from
 the BaseModel class as the parent class
 """
 
+
 class place(BaseModel):
     """
     Creates a class named place for the AirBnB Clone project.
