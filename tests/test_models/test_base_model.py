@@ -23,10 +23,10 @@ class TestBaseModelClass(unittest.TestCase):
 
     def test_instance_of_datetime(self):
         """
-            Test that the craeted_at and updated_at attributes
-            are instancs of datetime
+            Test that the created_at and updated_at attributes
+            are instances of datetime
         """
-        # for craeted_at attribute
+        # for created_at attribute
         self.assertIsInstance(self.first_model.created_at, datetime)
         self.assertIsInstance(self.second_model.created_at, datetime)
         # for update_at attribute
@@ -41,7 +41,7 @@ class TestBaseModelClass(unittest.TestCase):
         expected_output = (
             f"[{type(self.first_model).__name__}] "
             f"({self.first_model.id}) "
-            f"{self.forst_model.__dict__}"
+            f"{self.first_model.__dict__}"
         )
         self.assertEqual(str(self.first_model), expected_output)
 
