@@ -10,9 +10,10 @@ This is a python class that will be the Base class from which
 other classes will inherit
 """
 
+
 class BaseModel():
     """
-    This is a class modelling the BaseModel object for the AirBnB Clone project.
+    A class modelling the BaseModel object for the AirBnB Clone project
     """
     def __init__(self, *args, **kwargs) -> None:
         """This is the constructor for the BaseModel class that instantiates
@@ -38,7 +39,8 @@ class BaseModel():
         """Public instance method for the BaseModel that returns a str
         Representation of our BaseModel class"""
         return "[{}] ({}) {}".format(type(self).__name__,
-                                    self.id, self.__dict__)
+                                     self.id, self.__dict__)
+
     def save(self) -> None:
         """Public instance method that updates the `updates_at` public
         instance property"""
