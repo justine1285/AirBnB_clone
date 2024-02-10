@@ -19,7 +19,7 @@ class Testcity(unittest.TestCase):
 
     def test_father(self):
         cty = City()
-        self.assetTrue(issubclass(cty.__class__, BaseModel))
+        self.assertTrue(issubclass(cty.__class__, BaseModel))
 
     def test_city(self):
         """

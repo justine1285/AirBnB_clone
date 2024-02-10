@@ -16,7 +16,7 @@ class Testreview(unittest.TestCase):
 
     def test_class(self):
         my_review = Review()
-        self.assetEqual(my_review.__class__.__name__, "Review")
+        self.assertEqual(my_review.__class__.__name__, "Review")
 
     def test_father(self):
         my_review = Review()

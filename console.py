@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
         print("instance created.\n")
         print("Models available includes:\n")
         print("\tAmenity\n\tBaseModel\n\tCity\n\tPlace\n\tReview\n\t", end="")
-        print("State\n\\t\User\n")
+        print("State\n\tUser\n")
         print("Usage:\n(hbnb) create User\n")
 
     def do_show(self, args=None) -> None:
@@ -208,7 +208,7 @@ class HBNBCommand(cmd.Cmd):
                     if type(val).__name__ == args_num[0]:
                         list_all.append(str(val))
             else:
-                print("** class doesn't exist ***")
+                print("** class doesn't exist **")
                 return
         else:
             for key, val in storage.all().items():

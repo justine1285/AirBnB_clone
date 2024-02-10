@@ -35,5 +35,5 @@ class TestFileStorageClass(unittest.TestCase):
         obj = BaseModel()
         storage.new(obj)
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.assertIn(key, storage._FileStorage__objects.Keys())
+        self.assertIn(key, storage._FileStorage__objects.keys())
         self.assertIs(storage._FileStorage__objects[key], obj)

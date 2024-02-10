@@ -8,7 +8,7 @@ the BaseModel class as the parent class
 """
 
 
-class city(BaseModel):
+class City(BaseModel):
     """
     This is a class modelling the city object for the AirBnB Clone project.
     """

@@ -8,7 +8,7 @@ the BaseModel class as the parent class
 """
 
 
-class place(BaseModel):
+class Place(BaseModel):
     """
     Creates a class named place for the AirBnB Clone project.
     """

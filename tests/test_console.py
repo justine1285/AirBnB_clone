@@ -44,7 +44,7 @@ class TestConsole(unittest.TestCase):
         self.cli.onecmd("help create")
         self.assertTrue(self._last_write())
 
-    def test_do_craete(self):
+    def test_do_create(self):
         self.cli.onecmd("create User")
         self.assertTrue(sys.stdout.getvalue())
         self.flush_buffer()
@@ -52,7 +52,7 @@ class TestConsole(unittest.TestCase):
         self.assertEqual("** class name missing **\n", sys.stdout.getvalue())
         self.flush_buffer()
         self.cli.onecmd("create UserModel")
-        self.assertEqual("** class doesn't exist **\n", sys.stdut.getvalue())
+        self.assertEqual("** class doesn't exist **\n", sys.stdout.getvalue())
 
     def test_do_show(self):
         self.cli.onecmd("show")
@@ -85,8 +85,8 @@ class TestConsole(unittest.TestCase):
         self.flush_buffer()
 
     def test_do_all(self):
-        self.cli.onecmd("update")
-        self.assertEqual("** class doesn't exist **\n", sys.stdout.getvaluue())
+        self.cli.onecmd("all UserModel")
+        self.assertEqual("** class doesn't exist **\n", sys.stdout.getvalue())
 
     def tes_dot_update(self):
         self.cli.onecmd("update")
@@ -110,7 +110,7 @@ class TestConsole(unittest.TestCase):
                 count += 1
         self.cli.onecmd("User.count()")
 
-    @staticmetod
+    @staticmethod
     def flush_buffer():
         sys.stdout.seek(0)
         sys.stdout.truncate(0)

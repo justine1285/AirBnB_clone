@@ -50,7 +50,7 @@ class TestBaseModelClass(unittest.TestCase):
             Test that the save method update the
             updated_at attribute to the current datetime
         """
-        initial = self.first_model.update_at
+        initial = self.first_model.updated_at
         updated = self.first_model.save()
         self.assertNotEqual(initial, updated)
 
@@ -69,8 +69,8 @@ class TestBaseModelClass(unittest.TestCase):
         """
         obj = self.first_model.to_dict()
         pattern = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}"
-        self.assertRegx(str(obj['created_at']), pattern)
-        self.assertRegx(str(obj['updated_at']), pattern)
+        self.assertRegex(str(obj['created_at']), pattern)
+        self.assertRegex(str(obj['updated_at']), pattern)
 
     def test_recreate_instance(self):
         """
@@ -99,7 +99,7 @@ class TestBaseModelClass(unittest.TestCase):
             __class__ is not included
         """
         obj_json = self.first_model.to_dict()
-        vars_dict = vars(self.firs_model)
+        vars_dict = vars(self.first_model)
         for key in obj_json:
             if key == '__class__':
                 continue
