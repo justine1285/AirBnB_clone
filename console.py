@@ -205,7 +205,7 @@ class HBNBCommand(cmd.Cmd):
             arg_num = args.split(" ")
             if arg_num[0] in all_classes.keys():
                 for key, val in storage.all().items():
-                    if type(val).__name__ == args_num[0]:
+                    if type(val).__name__ == arg_num[0]:
                         list_all.append(str(val))
             else:
                 print("** class doesn't exist **")
@@ -216,10 +216,10 @@ class HBNBCommand(cmd.Cmd):
         print(list_all)
 
     def help_all(self) -> None:
-        """Updates the help for al"""
+        """Updates the help for all"""
         print("")
         print("The `all` command displays the string representation", end="")
-        print(" of all class instances present i the storage.\n")
+        print(" of all class instances present in the storage.\n")
         print("Usage:\n(hbnb) all User\nor\n(hbnb) User.all()\n")
 
     def do_update(self, args) -> None:
